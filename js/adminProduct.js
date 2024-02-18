@@ -1,9 +1,6 @@
 const { createApp } = Vue
 const api_path = 'david777'
-const productModal = document.querySelector('#productModal')
-const delProductModal = document.querySelector('#delProductModal')
-let myModal = ''
-let delModal =''
+
 import modal from './modal.js'
 import removeModal from './deleteModal.js'
 import pagination from './pagination.js'
@@ -31,7 +28,7 @@ const app = createApp({
             })
         },
         openModel (isNew, item) {
-            myModal.show()
+            this.$refs.pModal.openModal()
             if (isNew) {
               this.tempProduct = {}    
             } else {
@@ -45,7 +42,7 @@ const app = createApp({
             }
         },
         delOpenModel (product) {
-            delModal.show()
+            this.$refs.dModal.delOpenModal()
             this.delProductId = product.id
             this.tempProduct = product
         },
@@ -59,6 +56,7 @@ const app = createApp({
             }
             axios[httpMethods](api, { data: this.tempProduct }).then((res) => {
                 this.tempProduct = {}
+                this.$refs.pModal.hideModal()
                 this.getProducts()
             })
         },
@@ -66,6 +64,7 @@ const app = createApp({
           const api = `https://vue3-course-api.hexschool.io/v2/api/${api_path}/admin/product/${this.delProductId}`
             axios.delete(api).then((res) => {
               this.tempProduct = {}
+              this.$refs.dModal.delHideModal()
               this.getProducts()
             })
         },
@@ -81,7 +80,5 @@ const app = createApp({
         axios.post(api).then((res) => {
         }),
         this.getProducts()
-        myModal = new bootstrap.Modal('#productModal')
-        delModal = new bootstrap.Modal('#delProductModal')
     }
 }).mount('#app')
