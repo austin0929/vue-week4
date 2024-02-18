@@ -10,6 +10,8 @@ export default {
       tempProduct: {
         imagesUrl: []
       },
+      modalProduct: null,
+      delProductModal: null
     }
   },
   watch: {
@@ -21,7 +23,16 @@ export default {
     sendtempDate () {
         this.$emit('updateData',this.tempProduct)
     },
+    openModal () {
+        this.modalProduct.show()
+    },
+    hideModal () {
+        this.modalProduct.hide()
+    }
   },
+    mounted() {
+        this.modalProduct = new bootstrap.Modal(this.$refs.productModal)
+    },
     template: `
       <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
             aria-hidden="true">

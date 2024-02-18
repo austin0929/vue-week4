@@ -64,8 +64,8 @@
                     </tr>
                 </tbody>
             </table>
-            <modal :product="tempProduct" @update-data="updateProduct"></modal>
-            <remove-modal :delData="tempProduct" @my-del-modal="delProduct"></remove-modal>
+            <modal :product="tempProduct" @update-data="updateProduct" ref="pModal"></modal>
+            <remove-modal :delData="tempProduct" @my-del-modal="delProduct" ref="dModal"></remove-modal>
             <pagination :pages="pagination" @update-page="getProducts"></pagination>
         </div>
         <!-- Modal -->

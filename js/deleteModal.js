@@ -1,8 +1,22 @@
 export default {
+    data () {
+      return {
+        delModal: null
+      }
+    },
     methods: {
         sendDelModalId() {
             this.$emit('myDelModal')
+        },
+        delOpenModal () {
+            this.delModal.show()
+        },
+        delHideModal () {
+            this.delModal.hide()
         }
+    },
+    mounted() {
+        this.delModal = new bootstrap.Modal(this.$refs.delProductModal)
     },
     template: `
     <div id="delProductModal" ref="delProductModal" class="modal fade" tabindex="-1"
